@@ -1,5 +1,5 @@
 import sys
-import logging
+from src.logger import logging # import logger.py to create log file when exception is raised. See test below.
 
 def error_message_detail(error, error_detail:sys):
     _,_,exc_tb = error_detail.exc_info()
@@ -21,7 +21,7 @@ class CustomException(Exception):
 
 
 
-# # to check if the above exception implementation is working; run "python src/exception.py" and check.
+# # # to check if the above exception implementation is working; run "python src/exception.py" and check.
 # if __name__=="__main__":
 
 #     try:
