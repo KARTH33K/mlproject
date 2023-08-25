@@ -40,17 +40,24 @@ class ModelTrainer:
                 test_array[:, -1]
             )
 
+            logging.info("Splitting done")
+
             models = {
                 "Random Forest": RandomForestRegressor(),
                 "Decision Tree": DecisionTreeRegressor(),
                 "Gradient Boosting": GradientBoostingRegressor(),
                 "Linear Regression": LinearRegression(),
-                "XGBRegressor": XGBRegressor(),
+                "K-Neighbors Classifier": KNeighborsRegressor(),
+                "XGBClassifier": XGBRegressor(),
                 "CatBoosting Regressor": CatBoostRegressor(verbose=False),
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
+            
+            logging.info("model done")
 
             model_report:dict = evaluate_models(X_train = X_train, y_train = y_train, X_test = X_test, y_test = y_test, models = models)
+
+            logging.info("model report done")
 
 
              ## To get best model score from dict
@@ -65,8 +72,7 @@ class ModelTrainer:
             best_model = models[best_model_name]
 
             if best_model_score < 0.6:
-                raise CustomException("No best model found")
-            
+                raise CustomException("No best model found")                        
             logging.info("Best model found on both training and test dataset")
 
             save_object(
